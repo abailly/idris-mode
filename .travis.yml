@@ -51,8 +51,7 @@ install:
   - pushd .
   - git clone https://github.com/idris-lang/Idris-dev.git /tmp/Idris-dev
   - cd /tmp/Idris-dev
-  # Build dependencies
-  - stack --no-terminal --install-ghc test --only-dependencies
+  - stack --no-terminal --install-ghc install
 
 before_script: true
 
