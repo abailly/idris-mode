@@ -133,7 +133,7 @@
   "Establish a connection with a Idris REPL."
   (when (not idris-connection)
     (setq idris-connection
-          (open-network-stream "Idris IDE support" (idris-buffer-name :connection) "127.0.0.1" port))
+          (open-network-stream "Idris IDE support" (idris-buffer-name :connection) idris-interpreter-host port))
     (add-hook 'idris-event-hooks 'idris-version-hook-function)
     (add-hook 'idris-event-hooks 'idris-log-hook-function)
     (add-hook 'idris-event-hooks 'idris-warning-event-hook-function)
@@ -169,8 +169,9 @@
       (if (not (string-match idris-process-port-output-regexp string))
           (idris-warn string)
         (idris-warn (match-string 1 string))
-        (idris-connect (string-to-number (match-string 2 string))))
-      "")))
+        (idris-connect (string-to-number (match-string 2 string)))
+        ))
+    ""))
 
 (defun idris-show-process-buffer (string)
   "Show the Idris process buffer if STRING is non-empty."

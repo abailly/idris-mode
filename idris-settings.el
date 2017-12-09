@@ -40,6 +40,11 @@
   :type '(repeat string)
   :group 'idris)
 
+(defcustom idris-interpreter-host "127.0.0.1"
+  "The host to use to connect to Idris interpreter"
+  :type 'string
+  :group 'idris)
+
 (defcustom idris-warnings-printing (list 'warnings-tree)
   "How to print warnings: tree view ('warnings-tree) in REPL ('warnings-repl)"
   :group 'idris
