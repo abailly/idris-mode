@@ -6,7 +6,7 @@ EMACS=emacs
 BATCHEMACS=$(EMACS) --batch --no-site-file -q \
 	-eval '(add-to-list (quote load-path) "${PWD}/")' \
 	-eval '(require (quote package))' \
-  -eval '(add-to-list (quote package-archives) (quote ("melpa" . "http://melpa.org/packages/")) t)' \
+	-eval '(add-to-list (quote package-archives) (quote ("melpa" . "http://melpa.org/packages/")) t)' \
 	-eval '(package-initialize)'
 
 BYTECOMP = $(BATCHEMACS) -eval '(progn (require (quote bytecomp)) (setq byte-compile-warnings t) (setq byte-compile-error-on-warn nil))' -f batch-byte-compile
@@ -27,7 +27,7 @@ OBJS =	idris-commands.elc		\
 	idris-repl.elc			\
 	idris-settings.elc		\
 	idris-simple-indent.elc		\
-        idris-tree-info.elc             \
+	idris-tree-info.elc             \
 	idris-syntax.elc		\
 	idris-warnings.elc		\
 	idris-warnings-tree.elc		\
