@@ -7,3 +7,5 @@ ENV LANG            C.UTF-8
 RUN apt-get update -qq  && apt-get install -y make build-essential software-properties-common
 
 RUN apt-get install -y emacs25-nox
+
+RUN apt-get install -y docker.io

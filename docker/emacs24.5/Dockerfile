@@ -8,3 +8,5 @@ RUN apt-get update -qq && \
     apt-get install -y wget make build-essential software-properties-common
 
 RUN apt-get install -y emacs24-nox emacs24-el
+
+RUN apt-get install -y docker.io

@@ -11,3 +11,5 @@ RUN add-apt-repository -y ppa:cassou/emacs && \
     apt-get update -qq && \
     apt-get -f install && \
     apt-get install -qq emacs24 emacs24-el
+
+RUN apt-get install -y docker.io
