@@ -29,6 +29,7 @@
 (require 'idris-ipkg-mode)
 (require 'cl-lib)
 
+
 (ert-deftest trivial-test ()
   (should t))
 
