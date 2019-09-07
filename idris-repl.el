@@ -35,6 +35,8 @@
 (require 'idris-prover)
 (require 'idris-highlight-input)
 
+(eval-when-compile (require 'cl))
+
 
 (defvar idris-prompt-string "Idris"
   "The prompt shown in the REPL.")
@@ -64,7 +66,7 @@
 Returns non-`nil' on success, `nil' on failure."
   (let ((logo (idris-repl-get-logo)))
     (if (and (display-graphic-p)
-             (member 'png image-types)
+             (image-type-available-p 'png)
              logo)
         (progn (insert-image (create-image logo)
                              (idris-repl-welcome-message))
@@ -478,7 +480,7 @@ DIRECTION is 'forward' or 'backward' (in the history list)."
   "Return the position of the history item matching the PREFIX.
 Return -1 resp. the length of the history if no item matches."
   ;; Loop through the history list looking for a matching line
-  (let* ((step (ecase direction
+  (let* ((step (cl-ecase direction
                  (forward -1)
                  (backward 1)))
          (history idris-repl-input-history)

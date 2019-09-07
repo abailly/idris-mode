@@ -171,7 +171,7 @@ or nil if not found."
       ((find-file-r (path)
                     (let* ((parent (file-name-directory path))
                            (matching (if parent
-                                         (idris-try-directory-files parent t (concat suffix "$"))
+                                         (idris-try-directory-files parent t (concat "\\\." suffix "$"))
                                        nil)))
                       (cond
                        (matching matching)
@@ -333,7 +333,7 @@ arguments."
         (let ((pkgs nil))
           (cl-flet
               ((get-pkg ()
-                        (re-search-forward "[a-zA-Z0-9\\.]+" nil t)
+                        (re-search-forward "[a-zA-Z0-9\\._-]+" nil t)
                         (let ((beg (match-beginning 0))
                               (end (match-end 0)))
                           (push (buffer-substring-no-properties beg end) pkgs))))

@@ -595,7 +595,7 @@ KILLFLAG is set if N was explicitly specified."
   "If point is on a hole name, make it into a case expression. Otherwise, case split as a pattern variable."
   (interactive)
   (if (or (looking-at-p "\\?[a-zA-Z_]+")
-          (looking-back "\\?[a-zA-Z0-9_]+"))
+          (looking-back "\\?[a-zA-Z0-9_]+" nil))
       (idris-make-cases-from-hole)
     (idris-case-split)))
 
@@ -764,22 +764,18 @@ prefix argument sets the recursion depth directly."
         (insert result)))))
 
 (defun idris-identifier-backwards-from-point ()
-  (let ((identifier-start nil)
+  (let (identifier-start
         (identifier-end (point))
-        (last-char (char-before))
         (failure (list nil nil nil)))
-    (if (idris-is-ident-char-p last-char)
-        (progn
-          (save-excursion
-            (while (idris-is-ident-char-p (char-before))
-              (backward-char))
-            (setq identifier-start (point)))
-          (if identifier-start
-              (list (buffer-substring-no-properties identifier-start identifier-end)
-                    identifier-start
-                    identifier-end)
-            failure))
-      failure)))
+    (save-excursion
+      (while (and (> (point) (point-min)) (idris-is-ident-char-p (char-before)))
+        (backward-char)
+        (setq identifier-start (point)))
+      (if identifier-start
+          (list (buffer-substring-no-properties identifier-start identifier-end)
+                identifier-start
+                identifier-end)
+        failure))))
 
 (defun idris-complete-symbol-at-point ()
   "Attempt to complete the symbol at point as a global variable.
